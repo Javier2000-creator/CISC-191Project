@@ -14,6 +14,7 @@ public class WordPuzzleGame extends JFrame
 {
 	private JLabel displayLabel;
 	private char[] guessedWord;
+	private JLabel messageLabel;
 
 	public WordPuzzleGame()
 	{
@@ -25,7 +26,8 @@ public class WordPuzzleGame extends JFrame
 		selectNewWord();
 		
 		displayLabel = new JLabel(getDisplayWord(), SwingConstants.CENTER);
-		displayLabel.setFont(new Font("Arial", Font));
+		displayLabel.setFont(new Font("Arial", Font.BOLD, 20));
+		messageLabel = new JLabel("", SwingConstants.CENTER);
 	}
 
 	private String getDisplayWord()
