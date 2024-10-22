@@ -1,0 +1,21 @@
+import java.until.ArrayList
+import java.until.List;
+import java.until.Random;
+
+public class WordList {
+
+    private List<String> wordList;
+
+    public WordList() {
+        wordList=new ArrayList();
+        wordList.add("programming");
+        wordList.add("cybersecurity");
+        wordList.add("internet");
+        wordList.add("technology");
+        wordList.add("phone");
+    }
+
+    public String getRandomWord() {
+        Random random
+    }
+}
