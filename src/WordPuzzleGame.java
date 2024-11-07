@@ -19,6 +19,8 @@ public class WordPuzzleGame extends JFrame// a word puzzle game is a JFrame
 	private static final int maximumattempts = 10;
 	private JButton playAgainButton;
 	private JButton hintButton;
+	private int hintCount = 0;
+	private static final int maxhints = 2;
 
 	public WordPuzzleGame()
 	{
@@ -197,8 +199,7 @@ public class WordPuzzleGame extends JFrame// a word puzzle game is a JFrame
 	private void provideHint()
 	{
 		boolean hintGiven = false;
-		int hintCount = 0;
-		final int maxhints = 2;
+		
 		
 		if(hintCount <= maxhints)
 		{
@@ -228,6 +229,11 @@ public class WordPuzzleGame extends JFrame// a word puzzle game is a JFrame
 		{
 			// If no more hints can be given (e.g., the word is fully guessed)
 			messageLabel.setText("No more hints available.");
+		}
+		
+		if(hintCount >= maxhints)
+		{
+			hintButton.setEnabled(false);
 		}
 	}
 

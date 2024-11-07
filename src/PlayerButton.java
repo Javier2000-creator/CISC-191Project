@@ -12,7 +12,7 @@ public class PlayerButton extends JButton//PlayerButton is a JButton
 	 */
 	public PlayerButton(char letter)
 	{
-		super(String.valueOf(letter));
+		super(String.valueOf(letter)); 
 		this.letter = letter;
 	}
 	

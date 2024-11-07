@@ -15,7 +15,7 @@ public abstract class PuzzleComponent extends JButton
 
 	public PuzzleComponent()
 	{
-		displayLabel = new JLabel();
+		displayLabel = new JLabel(); 
 		messageLabel = new JLabel();
 		input = new JTextField();
 

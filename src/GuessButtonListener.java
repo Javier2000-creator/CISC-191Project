@@ -14,7 +14,7 @@ public class GuessButtonListener implements ActionListener// a
 	 * 
 	 * @param game
 	 */
-	public GuessButtonListener(WordPuzzleGame game)
+	public GuessButtonListener(WordPuzzleGame game) 
 	{
 		this.game = game;
 	}

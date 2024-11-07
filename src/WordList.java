@@ -13,7 +13,7 @@ public class WordList {
         // Adding some default words
         wordList.add("programming");
         wordList.add("java");
-        wordList.add("cybersecurity");
+        wordList.add("cybersecurity"); 
         wordList.add("phone");
         wordList.add("internet");
     }
