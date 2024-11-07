@@ -18,6 +18,7 @@ public class WordPuzzleGame extends JFrame// a word puzzle game is a JFrame
 	private int wrongguesses;
 	private static final int maximumattempts = 10;
 	private JButton playAgainButton;
+	private JButton hintButton;
 
 	public WordPuzzleGame()
 	{
@@ -68,10 +69,14 @@ public class WordPuzzleGame extends JFrame// a word puzzle game is a JFrame
 
 		// Add button to panel
 		inputPanel.add(guessButton);
-		
+
 		playAgainButton = new JButton("Play Again");
 		playAgainButton.addActionListener(e -> resetGame());
 		playAgainButton.setVisible(true);
+
+		hintButton = new JButton("Hint");
+		hintButton.addActionListener(e -> provideHint());
+		hintButton.setVisible(true);
 
 		// Adds components to the main frame
 		buttonPanel = letterButtons();
@@ -79,6 +84,7 @@ public class WordPuzzleGame extends JFrame// a word puzzle game is a JFrame
 		add(messageLabel, BorderLayout.NORTH); // Place message label at the top
 		add(inputPanel, BorderLayout.SOUTH); // Place input panel at the bottom
 		add(playAgainButton, BorderLayout.WEST);
+		add(hintButton, BorderLayout.EAST);
 
 		// makes the frame visible
 		setVisible(true);
@@ -131,7 +137,7 @@ public class WordPuzzleGame extends JFrame// a word puzzle game is a JFrame
 			guessedWord[i] = '_'; // Initialize with underscores
 		}
 	}
-	
+
 	private void resetGame()
 	{
 		wrongguesses = 0;
@@ -174,19 +180,57 @@ public class WordPuzzleGame extends JFrame// a word puzzle game is a JFrame
 
 		// updates the display word
 		displayLabel.setText(getDisplayWord());
-		
-		 // Check for win or lose
-	    if (new String(guessedWord).equals(selectedWord))
-	    {
-	        messageLabel.setText("You win! The word was: " + selectedWord);
-	    }
-	    
-	    else if (wrongguesses >= maximumattempts) 
-	    {
-	        messageLabel.setText("You lose! The word was: " + selectedWord);
-	        playAgainButton.setVisible(true);
-	    }
+
+		// Check for win or lose
+		if (new String(guessedWord).equals(selectedWord))
+		{
+			messageLabel.setText("You win! The word was: " + selectedWord);
+		}
+
+		else if (wrongguesses >= maximumattempts)
+		{
+			messageLabel.setText("You lose! The word was: " + selectedWord);
+			playAgainButton.setVisible(true);
+		}
 	}
+
+	private void provideHint()
+	{
+		boolean hintGiven = false;
+		int hintCount = 0;
+		final int maxhints = 2;
+		
+		if(hintCount <= maxhints)
+		{
+			messageLabel.setText("Maximum amount of hints reached!");
+	        hintButton.setEnabled(false); // Disables the hint button after 2 hints
+	        return;
+		}
+		
+		for (int i = 0; i < selectedWord.length(); i++)
+		{
+			if (guessedWord[i] == '_')
+			{ // Find an unguessed letter
+				guessedWord[i] = selectedWord.charAt(i); // Reveal the letter
+				hintGiven = true;
+				break; // Exit the loop after revealing one letter
+			}
+		}
+
+		// If a hint was given, update the display
+		if (hintGiven)
+		{
+			hintCount++;
+			messageLabel.setText("Here's a hint!");
+			displayLabel.setText(getDisplayWord());
+		}
+		else
+		{
+			// If no more hints can be given (e.g., the word is fully guessed)
+			messageLabel.setText("No more hints available.");
+		}
+	}
+
 
 	/**
 	 * Purpose: Main method of the game that creates an instance of the game
