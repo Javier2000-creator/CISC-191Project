@@ -55,6 +55,7 @@ public class WordPuzzleGame extends JFrame// a word puzzle game is a JFrame
 
 		// creates a button called Guess
 		JButton guessButton = new JButton("Guess");
+		
 
 		// adds action listener to the guess button
 		guessButton.addActionListener(new GuessButtonListener(this));
@@ -69,9 +70,6 @@ public class WordPuzzleGame extends JFrame// a word puzzle game is a JFrame
 		// Add input field to panel
 		inputPanel.add(input);
 
-		// Add button to panel
-		inputPanel.add(guessButton);
-
 		playAgainButton = new JButton("Play Again");
 		playAgainButton.addActionListener(e -> resetGame());
 		playAgainButton.setVisible(true);
@@ -79,14 +77,20 @@ public class WordPuzzleGame extends JFrame// a word puzzle game is a JFrame
 		hintButton = new JButton("Hint");
 		hintButton.addActionListener(e -> provideHint());
 		hintButton.setVisible(true);
+		
+		//adds buttons to the panel
+		inputPanel.add(guessButton);
+		inputPanel.add(hintButton);
+		inputPanel.add(playAgainButton);
 
 		// Adds components to the main frame
 		buttonPanel = letterButtons();
 		add(displayLabel, BorderLayout.CENTER); // Center the display label
 		add(messageLabel, BorderLayout.NORTH); // Place message label at the top
 		add(inputPanel, BorderLayout.SOUTH); // Place input panel at the bottom
-		add(playAgainButton, BorderLayout.WEST);
-		add(hintButton, BorderLayout.EAST);
+		//add(playAgainButton, BorderLayout.WEST);
+		//add(hintButton, BorderLayout.EAST);
+		
 
 		// makes the frame visible
 		setVisible(true);
@@ -201,7 +205,7 @@ public class WordPuzzleGame extends JFrame// a word puzzle game is a JFrame
 		boolean hintGiven = false;
 		
 		
-		if(hintCount <= maxhints)
+		if(hintCount >= maxhints)
 		{
 			messageLabel.setText("Maximum amount of hints reached!");
 	        hintButton.setEnabled(false); // Disables the hint button after 2 hints
