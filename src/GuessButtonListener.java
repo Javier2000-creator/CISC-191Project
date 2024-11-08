@@ -23,36 +23,45 @@ public class GuessButtonListener implements ActionListener// a
 	 * Purpose: Constructor that creates a method to handle button clicks
 	 */
 	@Override
-    public void actionPerformed(ActionEvent event)
+	public void actionPerformed(ActionEvent event)
 	{
-		try 
-		{
-			String guess = game.input.getText(); // Access the input field from the game
-			
-			if (guess.length() == 1) 
-			{
-				char guessedcharacter = guess.charAt(0);
-				
-				if(!Character.isLetter(guessedcharacter))
-				{
-					throw new IllegalArgumentException("Input must be a letter");
-				}
-				
-				guessedcharacter = Character.toLowerCase(guessedcharacter);
-				game.checkGuess(guessedcharacter);
-				game.input.setText("");
-			}
-			else
-			{
-				throw new IllegalArgumentException("Please enter a letter");
-			}
-		}
-		
-		catch(IllegalArgumentException exception)
-		{
-			game.messageLabel.setText(exception.getMessage());
-		}
+	    try 
+	    {
+	        String guess = game.input.getText(); // Access the input field from the game
+	        
+	        // Ensure the input is a single letter
+	        if (guess.length() == 1) 
+	        {
+	            char guessedCharacter = guess.charAt(0);
+	            
+	            // Checks if the guessed character is a valid letter (A-Z, a-z)
+	            if (!Character.isLetter(guessedCharacter)) 
+	            {
+	                throw new IllegalArgumentException("Input must be a letter (A-Z).");
+	            }
+
+	            // Convert the character to lowercase or uppercase based on preference
+	            guessedCharacter = Character.toLowerCase(guessedCharacter);
+
+	            // Calls the checkGuess method to check the guess
+	            game.checkGuess(guessedCharacter);
+
+	            // Clears the input field after the guess
+	            game.input.setText("");
+	        }
+	        else
+	        {
+	            // If the input is not a single letter, throw an exception
+	            throw new IllegalArgumentException("Please enter a single letter.");
+	        }
+	    }
+	    catch (IllegalArgumentException exception)
+	    {
+	        // Displays the error message in the message label
+	        game.messageLabel.setText(exception.getMessage());
+	    }
 	}
+
 }
 			
 			

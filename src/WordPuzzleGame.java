@@ -10,19 +10,23 @@ public class WordPuzzleGame extends JFrame// a word puzzle game is a JFrame
 {
 	private JLabel displayLabel;// a word puzzle game has a displayLabel
 	private char[] guessedWord;// a word puzzle game has many guessed words
-	JLabel messageLabel;// a word puzzle game has a message label
+	protected JLabel messageLabel;// a word puzzle game has a message label
 	private String selectedWord;// a word puzzle game has many selected words
-	JTextField input; // a word puzzle game has an input
+	protected JTextField input; // a word puzzle game has an input
 	private WordList wordList;// a word puzzle game has a list of words
-	private JPanel buttonPanel;
-	private int wrongguesses;
-	private static final int maximumattempts = 10;
-	private JButton playAgainButton;
-	private JButton hintButton;
-	private int hintCount = 0;
-	private static final int maxhints = 2;
+	private JPanel buttonPanel;// a word puzzle game has a buttonPanel
+	private int wrongguesses;// a word puzzle game has many wrong guesses
+	private static final int maximumattempts = 10;// a word puzzle game has a
+													// set amount of maximum
+													// attempts
+	private JButton playAgainButton;// a word puzzle game has a play again
+									// button
+	private JButton hintButton;// a word puzzle game has a hint button
+	private int hintCount = 0;// a word puzzle game has a hint count
+	private static final int maxhints = 2;// a word puzzle game has a max hint
+											// number
 
-	public WordPuzzleGame()
+	public WordPuzzleGame(String wordFile)
 	{
 		// sets the title of the game
 		setTitle("Word Puzzle Game");
@@ -36,7 +40,7 @@ public class WordPuzzleGame extends JFrame// a word puzzle game is a JFrame
 		// set BorderLayout
 		setLayout(new BorderLayout());
 
-		wordList = new WordList();
+		wordList = new WordList(wordFile);
 
 		// select a new word to guess
 		selectNewWord();
@@ -55,7 +59,6 @@ public class WordPuzzleGame extends JFrame// a word puzzle game is a JFrame
 
 		// creates a button called Guess
 		JButton guessButton = new JButton("Guess");
-		
 
 		// adds action listener to the guess button
 		guessButton.addActionListener(new GuessButtonListener(this));
@@ -77,8 +80,8 @@ public class WordPuzzleGame extends JFrame// a word puzzle game is a JFrame
 		hintButton = new JButton("Hint");
 		hintButton.addActionListener(e -> provideHint());
 		hintButton.setVisible(true);
-		
-		//adds buttons to the panel
+
+		// adds buttons to the panel
 		inputPanel.add(guessButton);
 		inputPanel.add(hintButton);
 		inputPanel.add(playAgainButton);
@@ -88,31 +91,54 @@ public class WordPuzzleGame extends JFrame// a word puzzle game is a JFrame
 		add(displayLabel, BorderLayout.CENTER); // Center the display label
 		add(messageLabel, BorderLayout.NORTH); // Place message label at the top
 		add(inputPanel, BorderLayout.SOUTH); // Place input panel at the bottom
-		//add(playAgainButton, BorderLayout.WEST);
-		//add(hintButton, BorderLayout.EAST);
-		
 
 		// makes the frame visible
 		setVisible(true);
 
 	}
 
+	/**
+	 * Purpose: Method to create a panel of letter buttons (A-Z) for the user to
+	 * click and guess letters
+	 * 
+	 * @return
+	 */
 	private JPanel letterButtons()
 	{
+		// Creates a new JPanel to hold the buttons
 		JPanel letterpanel = new JPanel();
+
+		// Sets the layout of the panel to a 3x9 grid (3 rows and 9 columns)
 		letterpanel.setLayout(new GridLayout(3, 9));
 
+		// Loop through all the letters from 'A' to 'Z'
 		for (char letter = 'A'; letter <= 'Z'; letter++)
 		{
+			// Assigns the current letter to a final variable for use inside the
+			// event handler
 			final char thisletter = letter;
+
+			// Creates a new PlayerButton for the current letter
 			PlayerButton mybutton = new PlayerButton(letter);
+
+			// Adds an action listener to the button that will trigger the
+			// buttonClickHandler when clicked
 			mybutton.addWordListener(e -> buttonClickHandler(thisletter));
+
+			// Adds the button to the letter panel
 			letterpanel.add(mybutton);
 		}
 
+		// Return the populated panel with all the letter buttons
 		return letterpanel;
 	}
 
+	/**
+	 * Purpose: Checks if the letter that the player guessed is part of the word
+	 * they have to guess
+	 * 
+	 * @param guessedLetter
+	 */
 	private void buttonClickHandler(char guessedLetter)
 	{
 		checkGuess(guessedLetter);
@@ -144,9 +170,14 @@ public class WordPuzzleGame extends JFrame// a word puzzle game is a JFrame
 		}
 	}
 
+	/**
+	 * Purpose: Resets the whole game
+	 */
 	private void resetGame()
 	{
 		wrongguesses = 0;
+		hintCount = 0;
+		hintButton.setEnabled(true);
 		selectNewWord();
 		displayLabel.setText(getDisplayWord());
 		messageLabel.setText("");
@@ -160,6 +191,7 @@ public class WordPuzzleGame extends JFrame// a word puzzle game is a JFrame
 	 */
 	public void checkGuess(char guessedChar)
 	{
+		guessedChar = Character.toLowerCase(guessedChar);
 		boolean correctGuess = false;
 
 		// Check if guessed character is in the selected word
@@ -203,15 +235,15 @@ public class WordPuzzleGame extends JFrame// a word puzzle game is a JFrame
 	private void provideHint()
 	{
 		boolean hintGiven = false;
-		
-		
-		if(hintCount >= maxhints)
+
+		if (hintCount >= maxhints)
 		{
 			messageLabel.setText("Maximum amount of hints reached!");
-	        hintButton.setEnabled(false); // Disables the hint button after 2 hints
-	        return;
+			hintButton.setEnabled(false); // Disables the hint button after 2
+											// hints
+			return;
 		}
-		
+
 		for (int i = 0; i < selectedWord.length(); i++)
 		{
 			if (guessedWord[i] == '_')
@@ -234,13 +266,12 @@ public class WordPuzzleGame extends JFrame// a word puzzle game is a JFrame
 			// If no more hints can be given (e.g., the word is fully guessed)
 			messageLabel.setText("No more hints available.");
 		}
-		
-		if(hintCount >= maxhints)
+
+		if (hintCount >= maxhints)
 		{
 			hintButton.setEnabled(false);
 		}
 	}
-
 
 	/**
 	 * Purpose: Main method of the game that creates an instance of the game
@@ -249,6 +280,7 @@ public class WordPuzzleGame extends JFrame// a word puzzle game is a JFrame
 	 */
 	public static void main(String[] args)
 	{
-		new WordPuzzleGame();
+		String wordFile = "WordList.txt";
+		new WordPuzzleGame(wordFile);
 	}
 }
