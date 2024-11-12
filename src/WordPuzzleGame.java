@@ -2,6 +2,7 @@ import java.awt.BorderLayout;
 
 import javax.swing.*;
 import java.awt.*;
+import java.util.Arrays;
 import java.util.Random;
 
 public class WordPuzzleGame extends JFrame// a word puzzle game is a JFrame
@@ -184,6 +185,9 @@ public class WordPuzzleGame extends JFrame// a word puzzle game is a JFrame
 	private void resetGame()
 	{
 		wrongguesses = 0;
+		guessedWord = new char[selectedWord.length()]; 
+	    Arrays.fill(guessedWord, '_');  
+
 		hintCount = 0;
 		hintButton.setEnabled(true);
 		selectNewWord();
@@ -233,6 +237,9 @@ public class WordPuzzleGame extends JFrame// a word puzzle game is a JFrame
 		if (new String(guessedWord).equals(selectedWord))
 		{
 			messageLabel.setText("You win! The word was: " + selectedWord);
+			Timer winTimer = new Timer(1000, e -> resetGame());
+	        winTimer.setRepeats(false);
+	        winTimer.start();
 		}
 
 		else if (wrongguesses >= maximumattempts)
