@@ -1,10 +1,10 @@
-import java.awt.BorderLayout;
+import java.awt.BorderLayout; 
 
 import javax.swing.*;
 import java.awt.*;
+import java.util.HashSet;
 import java.util.Random;
-import java.util.List;
-import java.util.ArrayList;
+import java.util.Set;
 
 public class WordPuzzleGame extends JFrame// a word puzzle game is a JFrame
 {
@@ -25,6 +25,9 @@ public class WordPuzzleGame extends JFrame// a word puzzle game is a JFrame
 	private int hintCount = 0;// a word puzzle game has a hint count
 	private static final int maxhints = 2;// a word puzzle game has a max hint
 											// number
+	private JLabel timerLabel;
+	private GameTimer gameTimer;
+	private Set<Character> guessedLetters = new HashSet<>();
 
 	public WordPuzzleGame(String wordFile)
 	{
@@ -40,6 +43,7 @@ public class WordPuzzleGame extends JFrame// a word puzzle game is a JFrame
 		// set BorderLayout
 		setLayout(new BorderLayout());
 
+		//creates a new variable that takes a wordFile(txt file) to read input from
 		wordList = new WordList(wordFile);
 
 		// select a new word to guess
@@ -53,7 +57,13 @@ public class WordPuzzleGame extends JFrame// a word puzzle game is a JFrame
 
 		// message label
 		messageLabel = new JLabel("", SwingConstants.CENTER);
+		
+		timerLabel = new JLabel("Time remaining: 30 seconds", SwingConstants.CENTER);
+		
+		gameTimer = new GameTimer(60, timerLabel, this);
+		gameTimer.start();
 
+		
 		// input field for one character
 		input = new JTextField(1);
 
@@ -91,6 +101,7 @@ public class WordPuzzleGame extends JFrame// a word puzzle game is a JFrame
 		add(displayLabel, BorderLayout.CENTER); // Center the display label
 		add(messageLabel, BorderLayout.NORTH); // Place message label at the top
 		add(inputPanel, BorderLayout.SOUTH); // Place input panel at the bottom
+		add(timerLabel, BorderLayout.EAST);
 
 		// makes the frame visible
 		setVisible(true);
@@ -182,6 +193,8 @@ public class WordPuzzleGame extends JFrame// a word puzzle game is a JFrame
 		displayLabel.setText(getDisplayWord());
 		messageLabel.setText("");
 		playAgainButton.setVisible(true);
+		gameTimer.reset(30);
+		gameTimer.start();
 	}
 
 	/**
@@ -192,6 +205,12 @@ public class WordPuzzleGame extends JFrame// a word puzzle game is a JFrame
 	public void checkGuess(char guessedChar)
 	{
 		guessedChar = Character.toLowerCase(guessedChar);
+		
+		if(guessedLetters.contains(guessedChar))
+		{
+			messageLabel.setText("You already guessed the letter:" + guessedChar);
+			return;
+		}
 		boolean correctGuess = false;
 
 		// Check if guessed character is in the selected word
@@ -271,6 +290,13 @@ public class WordPuzzleGame extends JFrame// a word puzzle game is a JFrame
 		{
 			hintButton.setEnabled(false);
 		}
+	}
+	
+	public void endGame(String message)
+	{
+		input.setEnabled(false);
+		messageLabel.setText(message);
+		gameTimer.stop();
 	}
 
 	/**
