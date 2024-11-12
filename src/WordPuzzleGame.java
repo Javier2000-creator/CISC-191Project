@@ -1,10 +1,8 @@
-import java.awt.BorderLayout; 
+import java.awt.BorderLayout;
 
 import javax.swing.*;
 import java.awt.*;
-import java.util.HashSet;
 import java.util.Random;
-import java.util.Set;
 
 public class WordPuzzleGame extends JFrame// a word puzzle game is a JFrame
 {
@@ -27,7 +25,6 @@ public class WordPuzzleGame extends JFrame// a word puzzle game is a JFrame
 											// number
 	private JLabel timerLabel;
 	private GameTimer gameTimer;
-	private Set<Character> guessedLetters = new HashSet<>();
 
 	public WordPuzzleGame(String wordFile)
 	{
@@ -193,7 +190,7 @@ public class WordPuzzleGame extends JFrame// a word puzzle game is a JFrame
 		displayLabel.setText(getDisplayWord());
 		messageLabel.setText("");
 		playAgainButton.setVisible(true);
-		gameTimer.reset(30);
+		gameTimer.reset(60);
 		gameTimer.start();
 	}
 
@@ -205,12 +202,6 @@ public class WordPuzzleGame extends JFrame// a word puzzle game is a JFrame
 	public void checkGuess(char guessedChar)
 	{
 		guessedChar = Character.toLowerCase(guessedChar);
-		
-		if(guessedLetters.contains(guessedChar))
-		{
-			messageLabel.setText("You already guessed the letter:" + guessedChar);
-			return;
-		}
 		boolean correctGuess = false;
 
 		// Check if guessed character is in the selected word

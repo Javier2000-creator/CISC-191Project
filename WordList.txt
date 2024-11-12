@@ -5,9 +5,9 @@ Remote
 Power
 Coding
 Methods
-constructors
-programming
-java
+Constructors
+Programming
+Java
 Cybersecurity
-phone
+Phone
 Internet
