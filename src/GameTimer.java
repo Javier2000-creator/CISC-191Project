@@ -1,49 +1,51 @@
 import javax.swing.*;
-import java.util.Timer;
-import java.util.TimerTask;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
 public class GameTimer {
-    private int duration;
-    private int timeRemaining;
+    private int timeRemaining; // in seconds
     private Timer timer;
     private JLabel timerLabel;
-    private WordPuzzleGame game; // Reference to main game class
 
-    public GameTimer(int duration, JLabel timerLabel, WordPuzzleGame game) {
-        this.duration = duration;
-        this.timeRemaining = duration;
+    public GameTimer(int seconds, JLabel timerLabel) {
+        this.timeRemaining = seconds;
         this.timerLabel = timerLabel;
-        this.game = game;
-    }
-
-    // Start the timer
-    public void start() {
-        timer = new Timer();
-        timer.scheduleAtFixedRate(new TimerTask() {
+        
+        // Define the action for each timer tick (every second)
+        timer = new Timer(1000, new ActionListener() {
             @Override
-            public void run() {
-                if (timeRemaining > 0) {
-                    timeRemaining--;
-                    timerLabel.setText("Time remaining: " + timeRemaining + "s");
-                } else {
-                    timer.cancel();
-                    game.endGame("Time's up!"); // Notify game that time's up
+            public void actionPerformed(ActionEvent e) {
+                timeRemaining--;
+                updateTimerLabel();
+                
+                // Check if time is up
+                if (timeRemaining <= 0) {
+                    timer.stop();
+                    JOptionPane.showMessageDialog(null, "Time's up! You lose this round.");
                 }
             }
-        }, 1000, 1000);
+        });
     }
 
-    // Stop the timer
+    // Starts or resumes the timer
+    public void start() {
+        timer.start();
+    }
+
+    // Pauses the timer
     public void stop() {
-        if (timer != null) {
-            timer.cancel();
-        }
+        timer.stop();
     }
 
-    // Restart the timer for a new round
-    public void restart() {
-        stop();
-        this.timeRemaining = duration;
-        start();
+    // Resets the timer to initial value and stops it (only when pressing "Play Again")
+    public void reset(int newTime) {
+        timer.stop();
+        this.timeRemaining = newTime;
+        updateTimerLabel();
+    }
+
+    // Updates the timer label on the GUI
+    private void updateTimerLabel() {
+        timerLabel.setText("Time remaining: " + timeRemaining + " seconds");
     }
 }
