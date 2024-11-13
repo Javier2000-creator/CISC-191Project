@@ -25,6 +25,8 @@ public class WordPuzzleGame extends JFrame// a word puzzle game is a JFrame
 	private int hintCount = 0;// a word puzzle game has a hint count
 	private static final int maxhints = 2;// a word puzzle game has a max hint
 											// number
+	private JLabel timerLabel; //Timer display label
+	private GameTimer gameTimer; // Game timer
 
 	public WordPuzzleGame(String wordFile)
 	{
@@ -53,6 +55,11 @@ public class WordPuzzleGame extends JFrame// a word puzzle game is a JFrame
 
 		// message label
 		messageLabel = new JLabel("", SwingConstants.CENTER);
+		
+		// timer label
+		timerLabel = new JLabel("Time remaining: 60 seconds", SwingConstants.CENTER);
+		gameTimer = new GameTimer(60, timerlabel); // Initialize GameTimer with 30 seconds
+		gameTimer.start(); // Start the timer when the game starts
 
 		// input field for one character
 		input = new JTextField(1);
@@ -75,6 +82,8 @@ public class WordPuzzleGame extends JFrame// a word puzzle game is a JFrame
 
 		playAgainButton = new JButton("Play Again");
 		playAgainButton.addActionListener(e -> resetGame());
+		gameTimer.reset(60); // Reset the timer to 60 seconds
+		gameTimer.start(); // Restart the timer
 		playAgainButton.setVisible(true);
 
 		hintButton = new JButton("Hint");
@@ -91,6 +100,7 @@ public class WordPuzzleGame extends JFrame// a word puzzle game is a JFrame
 		add(displayLabel, BorderLayout.CENTER); // Center the display label
 		add(messageLabel, BorderLayout.NORTH); // Place message label at the top
 		add(inputPanel, BorderLayout.SOUTH); // Place input panel at the bottom
+		add(timerLabel, BorderLayout.EAST); // ADD timer label to the right side
 
 		// makes the frame visible
 		setVisible(true);
@@ -223,12 +233,14 @@ public class WordPuzzleGame extends JFrame// a word puzzle game is a JFrame
 		if (new String(guessedWord).equals(selectedWord))
 		{
 			messageLabel.setText("You win! The word was: " + selectedWord);
+			// Timer continues without resetting
 		}
 
 		else if (wrongguesses >= maximumattempts)
 		{
 			messageLabel.setText("You lose! The word was: " + selectedWord);
 			playAgainButton.setVisible(true);
+			gameTimer.stop(); // Stop the timer if they lose
 		}
 	}
 
