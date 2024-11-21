@@ -5,13 +5,16 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 
+
 public class WordList
 {
 
 	// Attribute: A list of words for the game
 	private List<String> wordList;
 
-	// Constructor: Initializes the word list with some default words
+	/*
+	 * Purpose: Constructor that initializes the word list with some default words
+	 */
 	public WordList(String fileName)
 	{
 		wordList = new ArrayList<>();
@@ -34,6 +37,9 @@ public class WordList
 		}
 	}
 
+	/*
+	 * Purpose: Constructor that adds a number of default words in case the game doesn't read from the file correctly
+	 */
 	private void addDefaultWords()
 	{
 		// Adding some default words
@@ -44,7 +50,9 @@ public class WordList
 		wordList.add("internet");
 	}
 
-	// Method: Get a random word from the list
+	/*
+	 * Purpose: Method that gets a random word from the list
+	 */
 	public String getRandomWord()
 	{
 		Random random = new Random();
@@ -52,7 +60,9 @@ public class WordList
 		return wordList.get(index); // Return the word at that index
 	}
 
-	// Optional: Method to print all words in the list (for testing)
+	/*
+	 * Purpose: Method to print all words in the list (for testing)
+	 */
 	public void printWordList()
 	{
 		for (String word : wordList)
