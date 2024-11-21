@@ -18,3 +18,4 @@ Strategy
 Adventure
 Challenging
 Mystery
+Public
