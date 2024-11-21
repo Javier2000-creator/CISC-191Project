@@ -11,3 +11,11 @@ Java
 Cybersecurity
 Phone
 Internet
+Function
+Database
+Puzzle
+Strategy
+Adventure
+Challenging
+Mystery
+Public
