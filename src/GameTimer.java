@@ -26,6 +26,7 @@ public class GameTimer
 
 		// Timer action to update the label every second
 		ActionListener updateTimer = new ActionListener()
+		
 		{
 			@Override
 			public void actionPerformed(ActionEvent e)
