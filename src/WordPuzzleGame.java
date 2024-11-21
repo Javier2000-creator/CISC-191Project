@@ -1,9 +1,7 @@
-
-
 import java.awt.BorderLayout;
+
 import javax.swing.*;
 import java.awt.*;
-import java.util.Arrays;
 import java.util.Random;
 
 public class WordPuzzleGame extends JFrame// a word puzzle game is a JFrame
@@ -28,6 +26,10 @@ public class WordPuzzleGame extends JFrame// a word puzzle game is a JFrame
 	private JLabel timerLabel;
 	private GameTimer gameTimer;
 
+	/*
+	 * Purpose: Constructor that will take a word file and read off words from
+	 * the file for the game. This constructor also holds the necessary info for the game's mechanics like the layout, buttons, etc.
+	 */
 	public WordPuzzleGame(String wordFile)
 	{
 		// sets the title of the game
@@ -42,7 +44,8 @@ public class WordPuzzleGame extends JFrame// a word puzzle game is a JFrame
 		// set BorderLayout
 		setLayout(new BorderLayout());
 
-		//creates a new variable that takes a wordFile(txt file) to read input from
+		// creates a new variable that takes a wordFile(txt file) to read input
+		// from
 		wordList = new WordList(wordFile);
 
 		// select a new word to guess
@@ -56,13 +59,13 @@ public class WordPuzzleGame extends JFrame// a word puzzle game is a JFrame
 
 		// message label
 		messageLabel = new JLabel("", SwingConstants.CENTER);
-		
-		timerLabel = new JLabel("Time remaining: 30 seconds", SwingConstants.CENTER);
-		
+
+		timerLabel = new JLabel("Time remaining: 60 seconds",
+				SwingConstants.CENTER);
+
 		gameTimer = new GameTimer(60, timerLabel, this);
 		gameTimer.start();
 
-		
 		// input field for one character
 		input = new JTextField(1);
 
@@ -161,6 +164,11 @@ public class WordPuzzleGame extends JFrame// a word puzzle game is a JFrame
 	 */
 	private String getDisplayWord()
 	{
+		if(guessedWord == null)
+		{
+			return "";
+		}
+		
 		return String.valueOf(guessedWord);
 	}
 
@@ -186,9 +194,6 @@ public class WordPuzzleGame extends JFrame// a word puzzle game is a JFrame
 	private void resetGame()
 	{
 		wrongguesses = 0;
-		guessedWord = new char[selectedWord.length()]; 
-	    Arrays.fill(guessedWord, '_');  
-
 		hintCount = 0;
 		hintButton.setEnabled(true);
 		selectNewWord();
@@ -238,9 +243,9 @@ public class WordPuzzleGame extends JFrame// a word puzzle game is a JFrame
 		if (new String(guessedWord).equals(selectedWord))
 		{
 			messageLabel.setText("You win! The word was: " + selectedWord);
-			Timer winTimer = new Timer(1000, e -> resetGame());
-	        winTimer.setRepeats(false);
-	        winTimer.start();
+			selectNewWord();
+			displayLabel.setText(getDisplayWord());
+			messageLabel.setText("");
 		}
 
 		else if (wrongguesses >= maximumattempts)
@@ -250,6 +255,9 @@ public class WordPuzzleGame extends JFrame// a word puzzle game is a JFrame
 		}
 	}
 
+	/**
+	 * Purpose: This constructor provides a hint to the player,  which is a maximum of two hints per word.
+	 */
 	private void provideHint()
 	{
 		boolean hintGiven = false;
@@ -290,12 +298,16 @@ public class WordPuzzleGame extends JFrame// a word puzzle game is a JFrame
 			hintButton.setEnabled(false);
 		}
 	}
-	
+
+	/**
+	 * Purpose: Ends the game and leaves a message at the end of the game.
+	 */
 	public void endGame(String message)
 	{
 		input.setEnabled(false);
 		messageLabel.setText(message);
 		gameTimer.stop();
+		//playAgainButton.setVisible(true);
 	}
 
 	/**

@@ -5,17 +5,24 @@ import java.awt.event.ActionListener;
 
 public class GameTimer
 {
-	private int timeRemaining; 
-	private JLabel timerLabel; 
-	private WordPuzzleGame game; 
-	private Timer timer; 
+	private int timeRemaining;
+	private JLabel timerLabel;
+	private WordPuzzleGame game;
+	private Timer timer;
 
-
+	/**
+	 * Purpose: Creates an instance of a game timer which takes in three
+	 * parameters
+	 * 
+	 * @param initialTime
+	 * @param timerLabel
+	 * @param game
+	 */
 	public GameTimer(int initialTime, JLabel timerLabel, WordPuzzleGame game)
 	{
-		this.timeRemaining = initialTime; // Set the initial time for the game
-		this.timerLabel = timerLabel; // The label to display the timer
-		this.game = game; // Reference to the main game
+		this.timeRemaining = initialTime; // Sets the initial time for the game
+		this.timerLabel = timerLabel; // Label that displays the timer
+		this.game = game; // References the main game
 
 		// Timer action to update the label every second
 		ActionListener updateTimer = new ActionListener()
@@ -44,19 +51,27 @@ public class GameTimer
 		timer = new Timer(1000, updateTimer);
 	}
 
-	
+	/**
+	 * Purpose: Starts the timer
+	 */
 	public void start()
 	{
 		timer.start();
 	}
 
-
+	/**
+	 * Purpose: Stops the timer
+	 */
 	public void stop()
 	{
 		timer.stop();
 	}
 
-
+	/**
+	 * Purpose: Resets the time for the game.
+	 * 
+	 * @param newTime
+	 */
 	public void reset(int newTime)
 	{
 		timeRemaining = newTime;
