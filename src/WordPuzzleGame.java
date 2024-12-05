@@ -217,9 +217,9 @@ public class WordPuzzleGame extends JFrame// a word puzzle game is a JFrame
 		// Check if guessed character is in the selected word
 		for (int i = 0; i < selectedWord.length(); i++)
 		{
-			if (selectedWord.charAt(i) == guessedChar)
+			if (Character.toLowerCase(selectedWord.charAt(i)) == guessedChar)
 			{
-				guessedWord[i] = guessedChar; // Update guessed word
+				guessedWord[i] = selectedWord.charAt(i); // Update guessed word
 				correctGuess = true;
 			}
 		}
