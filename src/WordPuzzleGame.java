@@ -13,15 +13,15 @@ public class WordPuzzleGame extends JFrame// a word puzzle game is a JFrame
 	protected JTextField input; // a word puzzle game has an input
 	private WordList wordList;// a word puzzle game has a list of words
 	private JPanel buttonPanel;// a word puzzle game has a buttonPanel
-	private int wrongguesses;// a word puzzle game has many wrong guesses
-	private static final int maximumattempts = 10;// a word puzzle game has a
+	private int wrongGuesses;// a word puzzle game has many wrong guesses
+	private static final int maximumAttempts = 10;// a word puzzle game has a
 													// set amount of maximum
 													// attempts
 	private JButton playAgainButton;// a word puzzle game has a play again
 									// button
 	private JButton hintButton;// a word puzzle game has a hint button
 	private int hintCount = 0;// a word puzzle game has a hint count
-	private static final int maxhints = 2;// a word puzzle game has a max hint
+	private static final int maxHints = 2;// a word puzzle game has a max hint
 											// number
 	private JLabel timerLabel;
 	private GameTimer gameTimer;
@@ -177,10 +177,8 @@ public class WordPuzzleGame extends JFrame// a word puzzle game is a JFrame
 	 */
 	private void selectNewWord()
 	{
-		Random random = new Random();
-
 		// Select a random word
-		selectedWord = wordList.getRandomWord();
+		selectedWord = wordList.getRandomWord(); // Get a random word
 		guessedWord = new char[selectedWord.length()];
 		for (int i = 0; i < guessedWord.length; i++)
 		{
@@ -193,7 +191,7 @@ public class WordPuzzleGame extends JFrame// a word puzzle game is a JFrame
 	 */
 	private void resetGame()
 	{
-		wrongguesses = 0;
+		wrongGuesses = 0;
 		hintCount = 0;
 		hintButton.setEnabled(true);
 		selectNewWord();
@@ -232,8 +230,8 @@ public class WordPuzzleGame extends JFrame// a word puzzle game is a JFrame
 		// will display try again if the guess was wrong
 		else
 		{
-			wrongguesses++;
-			messageLabel.setText("Try again! Incorrect Guesses" + wrongguesses);
+			wrongGuesses++;
+			messageLabel.setText("Try again! Incorrect Guesses" + wrongGuesses);
 		}
 
 		// updates the display word
@@ -248,7 +246,7 @@ public class WordPuzzleGame extends JFrame// a word puzzle game is a JFrame
 			messageLabel.setText("");
 		}
 
-		else if (wrongguesses >= maximumattempts)
+		else if (wrongGuesses >= maximumAttempts)
 		{
 			messageLabel.setText("You lose! The word was: " + selectedWord);
 			playAgainButton.setVisible(true);
@@ -262,7 +260,7 @@ public class WordPuzzleGame extends JFrame// a word puzzle game is a JFrame
 	{
 		boolean hintGiven = false;
 
-		if (hintCount >= maxhints)
+		if (hintCount >= maxHints)
 		{
 			messageLabel.setText("Maximum amount of hints reached!");
 			hintButton.setEnabled(false); // Disables the hint button after 2
@@ -293,7 +291,7 @@ public class WordPuzzleGame extends JFrame// a word puzzle game is a JFrame
 			messageLabel.setText("No more hints available.");
 		}
 
-		if (hintCount >= maxhints)
+		if (hintCount >= maxHints)
 		{
 			hintButton.setEnabled(false);
 		}

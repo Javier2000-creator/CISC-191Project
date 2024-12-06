@@ -4,6 +4,7 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
+import java.util.Scanner;
 
 
 public class WordList
@@ -19,21 +20,19 @@ public class WordList
 	{
 		wordList = new ArrayList<>();
 
-		try (BufferedReader reader = new BufferedReader(
+		try (Scanner scanner = new Scanner(
 				new FileReader(fileName)))
 		{
-			String line;
-			while ((line = reader.readLine()) != null)
-			{
-				wordList.add(line.trim());
+			while (scanner.hasNextLine()) {
+				wordList.add(scanner.nextLine().trim());
 			}
 		}
 
 		catch (IOException e)
 		{
-			System.out.println(
-					"Error reading word list file. Falling bacl to default words");
-			addDefaultWords();
+			System.err.println(
+					"Error reading word list file. Falling back to default words");
+			addDefaultWords(); // Fallback to default words
 		}
 	}
 
@@ -55,6 +54,9 @@ public class WordList
 	 */
 	public String getRandomWord()
 	{
+		if (wordList.isEmpty()) {
+			throw new IllegalStateException("Word list is empty! Cannot select a word.");
+		}
 		Random random = new Random();
 		int index = random.nextInt(wordList.size()); // Select a random index
 		return wordList.get(index); // Return the word at that index
