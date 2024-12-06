@@ -4,7 +4,7 @@ import javax.swing.JButton;
 
 public class PlayerButton extends JButton//PlayerButton is a JButton
 {
-	private char letter;//a PlayerButton has a JButton 
+	private char letter;//a PlayerButton has a letter
 	
 	/**
 	 * Purpose: Constructor that takes a character and initializes the button

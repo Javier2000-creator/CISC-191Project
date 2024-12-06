@@ -4,41 +4,43 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
-
+import java.util.Scanner;
 
 public class WordList
 {
 
 	// Attribute: A list of words for the game
-	private List<String> wordList;
+	private List<String> wordList;// Class wordList has a list of words
 
-	/*
-	 * Purpose: Constructor that initializes the word list with some default words
-	 */
+	/**
+	 * Purpose: Constructor that takes in a file and uses the scanner tool to
+	 * read the next word in the file
+	 * 
+	 **/
 	public WordList(String fileName)
 	{
 		wordList = new ArrayList<>();
 
-		try (BufferedReader reader = new BufferedReader(
-				new FileReader(fileName)))
+		try (Scanner scanner = new Scanner(new FileReader(fileName)))
 		{
-			String line;
-			while ((line = reader.readLine()) != null)
+
+			while (scanner.hasNextLine())
 			{
-				wordList.add(line.trim());
+				wordList.add(scanner.nextLine().trim());
 			}
 		}
 
 		catch (IOException e)
 		{
 			System.out.println(
-					"Error reading word list file. Falling bacl to default words");
+					"Error reading word list file. Falling back to default words");
 			addDefaultWords();
 		}
 	}
 
 	/*
-	 * Purpose: Constructor that adds a number of default words in case the game doesn't read from the file correctly
+	 * Purpose: Constructor that adds a number of default words in case the game
+	 * doesn't read from the file correctly
 	 */
 	private void addDefaultWords()
 	{
@@ -55,6 +57,11 @@ public class WordList
 	 */
 	public String getRandomWord()
 	{
+		if(wordList.isEmpty())
+		{
+			throw new IllegalStateException("Word list is empty! Cannot select a word.");
+		}
+		
 		Random random = new Random();
 		int index = random.nextInt(wordList.size()); // Select a random index
 		return wordList.get(index); // Return the word at that index
