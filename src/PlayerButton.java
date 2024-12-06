@@ -2,7 +2,7 @@ import java.awt.event.ActionListener;
 
 import javax.swing.JButton;
 
-public class PlayerButton extends JButton//PlayerButton is a JButton
+public class PlayerButton extends JButton //A PlayerButton represents a clickable letter button in the game. 
 {
 	private char letter;//a PlayerButton has a letter
 	
