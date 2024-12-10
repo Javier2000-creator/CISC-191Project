@@ -88,7 +88,7 @@ public class GameTimer
 	}
 
 	/**
-	 * Purpose: Resets the time for the game.
+	 * Purpose: Resets the time for the game
 	 * 
 	 * @param newTime
 	 */
