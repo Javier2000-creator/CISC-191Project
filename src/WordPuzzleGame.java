@@ -20,7 +20,7 @@ public class WordPuzzleGame extends JFrame// a word puzzle game is a JFrame
 	private JButton playAgainButton;// a word puzzle game has a play again
 									// button
 	private JButton hintButton;// a word puzzle game has a hint button
-	private int hintCount = 0;// a word puzzle game has a hint count
+	private int hintCount;// a word puzzle game has a hint count
 	private static final int maxhints = 2;// a word puzzle game has a max hint
 											// number
 	private JLabel timerLabel;
@@ -184,6 +184,8 @@ public class WordPuzzleGame extends JFrame// a word puzzle game is a JFrame
 		{
 			guessedWord[i] = '_'; // Initialize with underscores
 		}
+		
+		hintCount = 0;
 	}
 
 	/**
@@ -192,8 +194,7 @@ public class WordPuzzleGame extends JFrame// a word puzzle game is a JFrame
 	private void resetGame()
 	{
 		wrongGuesses = 0;
-		hintCount = 0;
-		hintButton.setEnabled(true);
+		//hintButton.setEnabled(true);
 		selectNewWord();
 		displayLabel.setText(getDisplayWord());
 		messageLabel.setText("");
@@ -237,7 +238,7 @@ public class WordPuzzleGame extends JFrame// a word puzzle game is a JFrame
 		// updates the display word
 		displayLabel.setText(getDisplayWord());
 
-		// Check for win or lose
+		// Check for a win or loss
 		if (new String(guessedWord).equals(selectedWord))
 		{
 			messageLabel.setText("You win! The word was: " + selectedWord);
@@ -259,6 +260,7 @@ public class WordPuzzleGame extends JFrame// a word puzzle game is a JFrame
 	private void provideHint()
 	{
 		boolean hintGiven = false;
+
 
 		if (hintCount >= maxhints)
 		{
@@ -305,7 +307,6 @@ public class WordPuzzleGame extends JFrame// a word puzzle game is a JFrame
 		input.setEnabled(false);
 		messageLabel.setText(message);
 		gameTimer.stop();
-		//playAgainButton.setVisible(true);
 	}
 
 	/**
