@@ -1,7 +1,3 @@
-import java.awt.BorderLayout;
-import javax.swing.*;
-import java.awt.*;
-import java.util.Random;
 /**
  * WordPuzzleGame.java
  * 
@@ -17,6 +13,11 @@ import java.util.Random;
  * @author Christopher OShea & Javier Ayala
  * @date 10 December 2024 
  */
+import java.awt.BorderLayout;
+import javax.swing.*;
+import java.awt.*;
+import java.util.Random;
+
 public class WordPuzzleGame extends JFrame// a word puzzle game is a JFrame
 {
 	private JLabel displayLabel;// a word puzzle game has a displayLabel
