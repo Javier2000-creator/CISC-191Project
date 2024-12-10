@@ -5,7 +5,21 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 import java.util.Scanner;
-
+/**
+ * WordList.java
+ * 
+ * Purpose:
+ * - Manages the list of words used in the Word Puzzle Game.
+ * - Handles loading words from a file and providing random word selection.
+ * 
+ * Features:
+ * - Loads words from a file or adds default words if the file cannot be read.
+ * - Selects a random word from the list.
+ * - Prints all words (for testing purposes).
+ * 
+ * @author Christopher OShea & Javier Ayala
+ * @date 10 December 2024
+ */
 
 public class WordList
 {

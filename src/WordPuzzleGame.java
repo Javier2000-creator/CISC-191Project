@@ -1,9 +1,22 @@
 import java.awt.BorderLayout;
-
 import javax.swing.*;
 import java.awt.*;
 import java.util.Random;
-
+/**
+ * WordPuzzleGame.java
+ * 
+ * Purpose:
+ * - Implements the main logic and GUI for the Word Puzzle Game.
+ * - Manages user input, game state, and interactions with the word list and timer.
+ * 
+ * Features:
+ * - Displays the guessed word and updates as players guess letters.
+ * - Integrates hints, a timer, and round-based gameplay.
+ * - Handles game state transitions (win, lose, play again).
+ * 
+ * @author Christopher OShea & Javier Ayala
+ * @date 10 December 2024 
+ */
 public class WordPuzzleGame extends JFrame// a word puzzle game is a JFrame
 {
 	private JLabel displayLabel;// a word puzzle game has a displayLabel
@@ -268,13 +281,12 @@ public class WordPuzzleGame extends JFrame// a word puzzle game is a JFrame
 			return;
 		}
 
-		for (int i = 0; i < selectedWord.length(); i++)
+		for (int i = 0; i < selectedWord.length() && !hintGiven; i++)
 		{
 			if (guessedWord[i] == '_')
 			{ // Find an unguessed letter
 				guessedWord[i] = selectedWord.charAt(i); // Reveal the letter
-				hintGiven = true;
-				break; // Exit the loop after revealing one letter
+				hintGiven = true; // Set flag to stop further iterations				
 			}
 		}
 

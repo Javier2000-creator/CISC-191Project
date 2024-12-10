@@ -1,4 +1,23 @@
-
+/**
+ * GameTimer.java
+ * 
+ * Purpose:
+ * - Manages the countdown timer for the Word Puzzle Game.
+ * - Updates the timer display on the GUI and triggers game-over logic when the time runs out.
+ * 
+ * Features:
+ * - Starts, stops, and resets the timer.
+ * - Updates the JLabel to display the remaining time.
+ * - Interacts with the `WordPuzzleGame` to handle time-out scenarios.
+ * 
+ * Parameters:
+ * - `initialTime` (int): The starting time for the timer, in seconds.
+ * - `timerLabel` (JLabel): The label on the GUI that displays the countdown.
+ * - `game` (WordPuzzleGame): A reference to the main game instance to trigger game-over logic.
+ * 
+ * Author: Christopher OShea & Javier Ayala
+ * Date: 10 December 2024
+ */
 import javax.swing.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
