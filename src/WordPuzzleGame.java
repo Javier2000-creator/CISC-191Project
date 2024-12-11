@@ -64,7 +64,7 @@ public class WordPuzzleGame extends JFrame// a word puzzle game is a JFrame
 
 		// select a new word to guess
 		selectNewWord();
-
+		
 		// sets up display label
 		displayLabel = new JLabel(getDisplayWord(), SwingConstants.CENTER);
 
@@ -92,22 +92,22 @@ public class WordPuzzleGame extends JFrame// a word puzzle game is a JFrame
 		// takes input from the enter key to do the same function the guess
 		// button does
 		input.addActionListener(e -> guessButton.doClick());
+		
+		hintButton = new JButton("Hint");
+		hintButton.addActionListener(e -> provideHint());
+		hintButton.setVisible(true);
+
+		
+		playAgainButton = new JButton("Play Again");
+		playAgainButton.addActionListener(e -> resetGame());
+		playAgainButton.setVisible(true);
+
 
 		// Panel to hold input field and button
 		JPanel inputPanel = new JPanel();
 
 		// Add input field to panel
 		inputPanel.add(input);
-
-		playAgainButton = new JButton("Play Again");
-		playAgainButton.addActionListener(e -> resetGame());
-		playAgainButton.setVisible(true);
-
-		hintButton = new JButton("Hint");
-		hintButton.addActionListener(e -> provideHint());
-		hintButton.setVisible(true);
-
-		// adds buttons to the panel
 		inputPanel.add(guessButton);
 		inputPanel.add(hintButton);
 		inputPanel.add(playAgainButton);
@@ -121,6 +121,8 @@ public class WordPuzzleGame extends JFrame// a word puzzle game is a JFrame
 
 		// makes the frame visible
 		setVisible(true);
+		
+		
 
 	}
 
@@ -199,8 +201,56 @@ public class WordPuzzleGame extends JFrame// a word puzzle game is a JFrame
 			guessedWord[i] = '_'; // Initialize with underscores
 		}
 		
+	
 		hintCount = 0;
+		
+		//hintButton.setEnabled(true);
 	}
+	
+	/**
+	 * Purpose: This constructor provides a hint to the player,  which is a maximum of two hints per word.
+	 */
+	private void provideHint()
+	{
+		boolean hintGiven = false;
+
+
+		if (hintCount >= maxhints)
+		{
+			messageLabel.setText("Maximum amount of hints reached!");
+			hintButton.setEnabled(false); // Disables the hint button after 2
+											// hints
+			return;
+		}
+
+		for (int i = 0; i < selectedWord.length() && !hintGiven; i++)
+		{
+			if (guessedWord[i] == '_')
+			{ // Find an unguessed letter
+				guessedWord[i] = selectedWord.charAt(i); // Reveal the letter
+				hintGiven = true; // Set flag to stop further iterations				
+			}
+		}
+
+		// If a hint was given, update the display
+		if (hintGiven)
+		{
+			hintCount++;
+			messageLabel.setText("Here's a hint!");
+			displayLabel.setText(getDisplayWord());
+		}
+		else
+		{
+			// If no more hints can be given (e.g., the word is fully guessed)
+			messageLabel.setText("No more hints available.");
+		}
+
+		if (hintCount >= maxhints)
+		{
+			hintButton.setEnabled(false);
+		}
+	}
+
 
 	/**
 	 * Purpose: Resets the whole game
@@ -208,7 +258,6 @@ public class WordPuzzleGame extends JFrame// a word puzzle game is a JFrame
 	private void resetGame()
 	{
 		wrongGuesses = 0;
-		//hintButton.setEnabled(true);
 		selectNewWord();
 		displayLabel.setText(getDisplayWord());
 		messageLabel.setText("");
@@ -256,6 +305,9 @@ public class WordPuzzleGame extends JFrame// a word puzzle game is a JFrame
 		if (new String(guessedWord).equals(selectedWord))
 		{
 			messageLabel.setText("You win! The word was: " + selectedWord);
+			
+			hintCount = 0;
+			hintButton.setEnabled(true);
 			selectNewWord();
 			displayLabel.setText(getDisplayWord());
 			messageLabel.setText("");
@@ -268,50 +320,7 @@ public class WordPuzzleGame extends JFrame// a word puzzle game is a JFrame
 		}
 	}
 
-	/**
-	 * Purpose: This constructor provides a hint to the player,  which is a maximum of two hints per word.
-	 */
-	private void provideHint()
-	{
-		boolean hintGiven = false;
-
-
-		if (hintCount >= maxhints)
-		{
-			messageLabel.setText("Maximum amount of hints reached!");
-			hintButton.setEnabled(false); // Disables the hint button after 2
-											// hints
-			return;
-		}
-
-		for (int i = 0; i < selectedWord.length() && !hintGiven; i++)
-		{
-			if (guessedWord[i] == '_')
-			{ // Find an unguessed letter
-				guessedWord[i] = selectedWord.charAt(i); // Reveal the letter
-				hintGiven = true; // Set flag to stop further iterations				
-			}
-		}
-
-		// If a hint was given, update the display
-		if (hintGiven)
-		{
-			hintCount++;
-			messageLabel.setText("Here's a hint!");
-			displayLabel.setText(getDisplayWord());
-		}
-		else
-		{
-			// If no more hints can be given (e.g., the word is fully guessed)
-			messageLabel.setText("No more hints available.");
-		}
-
-		if (hintCount >= maxhints)
-		{
-			hintButton.setEnabled(false);
-		}
-	}
-
+	
 	/**
 	 * Purpose: Ends the game and leaves a message at the end of the game.
 	 */
