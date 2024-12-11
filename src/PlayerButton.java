@@ -8,7 +8,7 @@
  * Features:
  * - Stores the letter it represents.
  * - Provides a method to retrieve the letter.
- * - Allows adding an ActionListener for user interaction.
+ * - Allows adding an ActionListener for user interaction
  * 
  * Author: Christopher OShea & Javier Ayala
  * Date: 10 December 2024

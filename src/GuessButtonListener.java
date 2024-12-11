@@ -10,7 +10,7 @@
  * - Captures user input from the text field.
  * - Validates the input to ensure it is a single letter.
  * - Calls the `checkGuess` method in `WordPuzzleGame` to handle the guess.
- * - Displays error messages for invalid inputs.
+ * - Displays error messages for invalid inputs
  * 
  * @author Christopher OShea & Javier Ayala
  * @date 10 December 2024
