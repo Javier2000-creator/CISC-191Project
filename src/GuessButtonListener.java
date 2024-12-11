@@ -1,4 +1,24 @@
+<<<<<<< HEAD
 import java.awt.event.ActionEvent; 
+=======
+/**
+ * GuessButtonListener.java
+ * 
+ * Purpose:
+ * - Handles the "Guess" button clicks in the Word Puzzle Game.
+ * - Processes user input from the text field and validates it before passing it to the game logic.
+ * - Ensures only valid guesses (single letters) are processed.
+ * 
+ * Features:
+ * - Captures user input from the text field.
+ * - Validates the input to ensure it is a single letter.
+ * - Calls the `checkGuess` method in `WordPuzzleGame` to handle the guess.
+ * - Displays error messages for invalid inputs
+ * 
+ * @author Christopher OShea & Javier Ayala
+ * @date 10 December 2024
+ */
+>>>>>>> branch 'main' of https://github.com/Javier2000-creator/CISC-191Project.git
 
 import java.awt.event.ActionListener;
 
