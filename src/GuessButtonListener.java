@@ -1,6 +1,4 @@
-<<<<<<< HEAD
-import java.awt.event.ActionEvent; 
-=======
+
 /**
  * GuessButtonListener.java
  * 
@@ -18,9 +16,10 @@ import java.awt.event.ActionEvent;
  * @author Christopher OShea & Javier Ayala
  * @date 10 December 2024
  */
->>>>>>> branch 'main' of https://github.com/Javier2000-creator/CISC-191Project.git
+
 
 import java.awt.event.ActionListener;
+import java.awt.event.ActionEvent; 
 
 public class GuessButtonListener implements ActionListener// a
 															// GuessButtonListener
