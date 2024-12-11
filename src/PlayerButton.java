@@ -1,6 +1,4 @@
-<<<<<<< HEAD
-import java.awt.event.ActionListener; 
-=======
+
 /**
  * PlayerButton.java
  * 
@@ -18,9 +16,10 @@ import java.awt.event.ActionListener;
  */
 import javax.swing.*;
 import java.awt.event.ActionListener;
->>>>>>> branch 'main' of https://github.com/Javier2000-creator/CISC-191Project.git
 
 import javax.swing.JButton;
+import java.awt.event.ActionListener; 
+
 
 public class PlayerButton extends JButton
 {

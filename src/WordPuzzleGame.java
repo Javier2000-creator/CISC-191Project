@@ -1,5 +1,5 @@
 /**
- * WordPuzzleGame.java
+ * WordPuzzleGame.java 
  * 
  * Purpose:
  * - Implements the main logic and GUI for the Word Puzzle Game.
