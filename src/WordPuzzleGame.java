@@ -1,9 +1,11 @@
+
 /**
- * WordPuzzleGame.java 
+ * WordPuzzleGame.java
  * 
  * Purpose:
  * - Implements the main logic and GUI for the Word Puzzle Game.
- * - Manages user input, game state, and interactions with the word list and timer.
+ * - Manages user input, game state, and interactions with the word list and
+ * timer.
  * 
  * Features:
  * - Displays the guessed word and updates as players guess letters.
@@ -11,7 +13,7 @@
  * - Handles game state transitions (win, lose, play again).
  * 
  * @author Christopher OShea & Javier Ayala
- * @date 10 December 2024 
+ * @date 10 December 2024
  */
 import java.awt.BorderLayout;
 import javax.swing.*;
@@ -20,29 +22,32 @@ import java.util.Random;
 
 public class WordPuzzleGame extends JFrame// a word puzzle game is a JFrame
 {
-	private JLabel displayLabel;// a word puzzle game has a displayLabel
-	private char[] guessedWord;// a word puzzle game has many guessed words
-	protected JLabel messageLabel;// a word puzzle game has a message label
-	private String selectedWord;// a word puzzle game has many selected words
-	protected JTextField input; // a word puzzle game has an input
-	private WordList wordList;// a word puzzle game has a list of words
-	private JPanel buttonPanel;// a word puzzle game has a buttonPanel
-	private int wrongGuesses;// a word puzzle game has many wrong guesses
-	private static final int maximumattempts = 10;// a word puzzle game has a
+	private JLabel displayLabel;// a WordPuzzleGame has a displayLabel
+	private char[] guessedWord;// a WordPuzzleGame has many guessed words
+	protected JLabel messageLabel;// a WordPuzzleGame has a message label
+	private String selectedWord;// a WordPuzzleGame has many selected words
+	protected JTextField input; // a WordPuzzleGame has an input
+	private WordList wordList;// a WordPuzzleGame has a list of words
+	private JPanel buttonPanel;// a WordPuzzleGame has a buttonPanel
+	private int wrongGuesses;// a WordPuzzleGame has many wrong guesses
+	private static final int maximumattempts = 10;// a WordPuzzleGame has a
 													// set amount of maximum
 													// attempts
-	private JButton playAgainButton;// a word puzzle game has a play again
+	private JButton playAgainButton;// a WordPuzzleGame has a play again
 									// button
-	private JButton hintButton;// a word puzzle game has a hint button
-	private int hintCount;// a word puzzle game has a hint count
-	private static final int maxhints = 2;// a word puzzle game has a max hint
+	private JButton hintButton;// a WordPuzzleGame has a hint button
+	private int hintCount;// a WordPuzzleGame has a hint count
+	private static final int maxhints = 2;// a WordPuzzleGame has a max hint
 											// number
-	private JLabel timerLabel;
-	private GameTimer gameTimer;
+	private JLabel timerLabel;// a WordPuzzleGame has a timer label
+	private GameTimer gameTimer;// a WordPuzzleGame has a game timer
 
-	/*
+	/**
 	 * Purpose: Constructor that will take a word file and read off words from
-	 * the file for the game. This constructor also holds the necessary info for the game's mechanics like the layout, buttons, etc.
+	 * the file for the game. This constructor also holds the necessary info for
+	 * the game's mechanics like the layout, buttons, etc.
+	 * 
+	 * @param wordFile
 	 */
 	public WordPuzzleGame(String wordFile)
 	{
@@ -64,7 +69,7 @@ public class WordPuzzleGame extends JFrame// a word puzzle game is a JFrame
 
 		// select a new word to guess
 		selectNewWord();
-		
+
 		// sets up display label
 		displayLabel = new JLabel(getDisplayWord(), SwingConstants.CENTER);
 
@@ -92,16 +97,14 @@ public class WordPuzzleGame extends JFrame// a word puzzle game is a JFrame
 		// takes input from the enter key to do the same function the guess
 		// button does
 		input.addActionListener(e -> guessButton.doClick());
-		
+
 		hintButton = new JButton("Hint");
 		hintButton.addActionListener(e -> provideHint());
 		hintButton.setVisible(true);
 
-		
 		playAgainButton = new JButton("Play Again");
 		playAgainButton.addActionListener(e -> resetGame());
 		playAgainButton.setVisible(true);
-
 
 		// Panel to hold input field and button
 		JPanel inputPanel = new JPanel();
@@ -121,8 +124,6 @@ public class WordPuzzleGame extends JFrame// a word puzzle game is a JFrame
 
 		// makes the frame visible
 		setVisible(true);
-		
-		
 
 	}
 
@@ -180,11 +181,14 @@ public class WordPuzzleGame extends JFrame// a word puzzle game is a JFrame
 	 */
 	private String getDisplayWord()
 	{
-		if(guessedWord == null)
+		// checks if the guessed word is null and returns an empty string if it
+		// is
+		if (guessedWord == null)
 		{
 			return "";
 		}
-		
+
+		// else it returns and shows the guessed word if it is correct
 		return String.valueOf(guessedWord);
 	}
 
@@ -200,20 +204,19 @@ public class WordPuzzleGame extends JFrame// a word puzzle game is a JFrame
 		{
 			guessedWord[i] = '_'; // Initialize with underscores
 		}
-		
-	
+
 		hintCount = 0;
-		
-		//hintButton.setEnabled(true);
+
+		// hintButton.setEnabled(true);
 	}
-	
+
 	/**
-	 * Purpose: This constructor provides a hint to the player,  which is a maximum of two hints per word.
+	 * Purpose: This constructor provides a hint to the player, which is a
+	 * maximum of two hints per word.
 	 */
 	private void provideHint()
 	{
 		boolean hintGiven = false;
-
 
 		if (hintCount >= maxhints)
 		{
@@ -228,7 +231,7 @@ public class WordPuzzleGame extends JFrame// a word puzzle game is a JFrame
 			if (guessedWord[i] == '_')
 			{ // Find an unguessed letter
 				guessedWord[i] = selectedWord.charAt(i); // Reveal the letter
-				hintGiven = true; // Set flag to stop further iterations				
+				hintGiven = true; // Set flag to stop further iterations
 			}
 		}
 
@@ -245,25 +248,26 @@ public class WordPuzzleGame extends JFrame// a word puzzle game is a JFrame
 			messageLabel.setText("No more hints available.");
 		}
 
+		// if the number of hints used is greater than the number of hints given
+		// then it disables the hint button
 		if (hintCount >= maxhints)
 		{
 			hintButton.setEnabled(false);
 		}
 	}
 
-
 	/**
 	 * Purpose: Resets the whole game
 	 */
 	private void resetGame()
 	{
-		wrongGuesses = 0;
-		selectNewWord();
-		displayLabel.setText(getDisplayWord());
+		wrongGuesses = 0;//initializes the number of wrong guesses to 0
+		selectNewWord();//calls the method to select a new word
+		displayLabel.setText(getDisplayWord());//displays the word
 		messageLabel.setText("");
-		playAgainButton.setVisible(true);
-		gameTimer.reset(60);
-		gameTimer.start();
+		playAgainButton.setVisible(true);//sets the play again button to be visible 
+		gameTimer.reset(60);//resets the game timer to 60 seconds
+		gameTimer.start();//starts the game timer
 	}
 
 	/**
@@ -273,6 +277,7 @@ public class WordPuzzleGame extends JFrame// a word puzzle game is a JFrame
 	 */
 	public void checkGuess(char guessedChar)
 	{
+		// makes sure that the letter(whether it is lower case or upper case) is correct when guessed
 		guessedChar = Character.toLowerCase(guessedChar);
 		boolean correctGuess = false;
 
@@ -304,10 +309,16 @@ public class WordPuzzleGame extends JFrame// a word puzzle game is a JFrame
 		// Check for a win or loss
 		if (new String(guessedWord).equals(selectedWord))
 		{
+			//prints out a message if the guessed word is correct
 			messageLabel.setText("You win! The word was: " + selectedWord);
-			
+
+			//resets the hint count to 0 every time a word is guessed correctly
 			hintCount = 0;
+			
+			//enables the hint button
 			hintButton.setEnabled(true);
+			
+			//selects a new word
 			selectNewWord();
 			displayLabel.setText(getDisplayWord());
 			messageLabel.setText("");
@@ -315,18 +326,18 @@ public class WordPuzzleGame extends JFrame// a word puzzle game is a JFrame
 
 		else if (wrongGuesses >= maximumattempts)
 		{
+			//prints out a message after the maximum amount of attempts are used without correctly guessing the word
 			messageLabel.setText("You lose! The word was: " + selectedWord);
 			playAgainButton.setVisible(true);
 		}
 	}
 
-	
 	/**
 	 * Purpose: Ends the game and leaves a message at the end of the game.
 	 */
 	public void endGame(String message)
 	{
-		input.setEnabled(false);
+		input.setEnabled(false);//
 		messageLabel.setText(message);
 		gameTimer.stop();
 	}

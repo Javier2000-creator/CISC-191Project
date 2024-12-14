@@ -1,6 +1,6 @@
 
 /**
- * PlayerButton.java
+ * PlayerButton.java 
  * 
  * Purpose:
  * - Represents a clickable button for a specific letter in the Word Puzzle Game.
@@ -23,7 +23,7 @@ import java.awt.event.ActionListener;
 
 public class PlayerButton extends JButton
 {
-	private char letter;//a PlayerButton has a letter
+	private char letter;//PlayerButton has a letter
 	
 	/**
 	 * Purpose: Constructor that takes a character and initializes the button

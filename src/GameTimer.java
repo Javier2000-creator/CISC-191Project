@@ -1,5 +1,5 @@
 /**
- * GameTimer.java
+ * GameTimer.java 
  * 
  * Purpose:
  * - Manages the countdown timer for the Word Puzzle Game.
@@ -22,12 +22,12 @@ import javax.swing.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
-public class GameTimer
+public class GameTimer implements TimerInterface
 {
-	private int timeRemaining;
-	private JLabel timerLabel;
-	private WordPuzzleGame game;
-	private Timer timer;
+	private int timeRemaining;//GameTimer has a time remaining 
+	private JLabel timerLabel;//GameTimer has a Timer label
+	private WordPuzzleGame game;//GameTimer has a game
+	private Timer timer;//GameTimer has a timer
 
 	/**
 	 * Purpose: Creates an instance of a game timer which takes in three
@@ -71,6 +71,7 @@ public class GameTimer
 		timer = new Timer(1000, updateTimer);
 	}
 
+	@Override
 	/**
 	 * Purpose: Starts the timer
 	 */
@@ -79,6 +80,7 @@ public class GameTimer
 		timer.start();
 	}
 
+	@Override
 	/**
 	 * Purpose: Stops the timer
 	 */
@@ -87,6 +89,7 @@ public class GameTimer
 		timer.stop();
 	}
 
+	@Override
 	/**
 	 * Purpose: Resets the time for the game
 	 * 

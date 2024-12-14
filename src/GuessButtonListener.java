@@ -1,6 +1,6 @@
 
 /**
- * GuessButtonListener.java
+ * GuessButtonListener.java 
  * 
  * Purpose:
  * - Handles the "Guess" button clicks in the Word Puzzle Game.
@@ -26,7 +26,7 @@ public class GuessButtonListener implements ActionListener// a
 															// is a Action
 															// Listener
 {
-	private WordPuzzleGame game;// a WordPuzzleGame has a game
+	private WordPuzzleGame game;// a GuessButtonListener has a game
 
 	/**
 	 * Purpose: Constructor that takes a WordPuzzleGame instance
