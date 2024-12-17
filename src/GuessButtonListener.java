@@ -53,7 +53,7 @@ public class GuessButtonListener implements ActionListener// a
 	        {
 	            char guessedCharacter = guess.charAt(0);
 	            
-	            // Checks if the guessed character is a valid letter (A-Z, a-z)
+	            //Checks if the guessed character is a valid letter (A-Z, a-z)
 	            if (!Character.isLetter(guessedCharacter)) 
 	            {
 	                throw new IllegalArgumentException("Input must be a letter (A-Z).");
@@ -68,11 +68,11 @@ public class GuessButtonListener implements ActionListener// a
 	            // Clears the input field after the guess
 	            game.input.setText("");
 	        }
-	        else
-	        {
-	            // If the input is not a single letter, throw an exception
-	            throw new IllegalArgumentException("Please enter a single letter.");
-	        }
+//	        else
+//	        {
+//	            // If the input is not a single letter, throw an exception
+//	            throw new IllegalArgumentException("Please enter a single letter.");
+//	        }
 	    }
 	    catch (IllegalArgumentException exception)
 	    {

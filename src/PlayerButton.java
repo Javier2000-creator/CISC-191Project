@@ -1,24 +1,7 @@
 
-/**
- * PlayerButton.java 
- * 
- * Purpose:
- * - Represents a clickable button for a specific letter in the Word Puzzle Game.
- * - Extends JButton to associate a letter with the button.
- * 
- * Features:
- * - Stores the letter it represents.
- * - Provides a method to retrieve the letter.
- * - Allows adding an ActionListener for user interaction
- * 
- * Author: Christopher OShea & Javier Ayala
- * Date: 10 December 2024
- */
-import javax.swing.*;
 import java.awt.event.ActionListener;
 
-import javax.swing.JButton;
-import java.awt.event.ActionListener; 
+import javax.swing.JButton; 
 
 
 public class PlayerButton extends JButton

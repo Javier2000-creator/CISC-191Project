@@ -12,6 +12,22 @@
  * - Integrates hints, a timer, and round-based gameplay.
  * - Handles game state transitions (win, lose, play again).
  * 
+ * Resources/Citations:
+ * 
+ * -Hartman, J. (2019, August 2). Java Swing Tutorial:
+ * Examples to create GUI. Guru99.com.
+ * https://www.guru99.com/java-swing-gui.html
+ * 
+ * -GeeksforGeeks. (2023, September 11). Types of Exception in Java with
+ * Examples. GeeksforGeeks.
+ * https://www.geeksforgeeks.org/types-of-exception-in-java-with-examples/
+ * 
+ * -Data Structures in Java (with code examples). (n.d.).
+ * https://www.codechef.com/blogs/data-structures-in-java
+ * 
+ * -GeeksforGeeks. (2024b, October 4). Interfaces in Java. GeeksforGeeks.
+ * https://www.geeksforgeeks.org/interfaces-in-java/
+ * 
  * @author Christopher OShea & Javier Ayala
  * @date 10 December 2024
  */
@@ -261,13 +277,17 @@ public class WordPuzzleGame extends JFrame// a word puzzle game is a JFrame
 	 */
 	private void resetGame()
 	{
-		wrongGuesses = 0;//initializes the number of wrong guesses to 0
-		selectNewWord();//calls the method to select a new word
-		displayLabel.setText(getDisplayWord());//displays the word
+		wrongGuesses = 0;// initializes the number of wrong guesses to 0
+		selectNewWord();// calls the method to select a new word
+		displayLabel.setText(getDisplayWord());// displays the word
 		messageLabel.setText("");
-		playAgainButton.setVisible(true);//sets the play again button to be visible 
-		gameTimer.reset(60);//resets the game timer to 60 seconds
-		gameTimer.start();//starts the game timer
+		playAgainButton.setVisible(true);// sets the play again button to be
+											// visible
+		gameTimer.reset(60);// resets the game timer to 60 seconds
+		gameTimer.start();// starts the game timer
+		hintCount = 0;// resets the hint count to zero
+		hintButton.setEnabled(true);// enables the hint button after pressing
+									// the play again button
 	}
 
 	/**
@@ -277,7 +297,8 @@ public class WordPuzzleGame extends JFrame// a word puzzle game is a JFrame
 	 */
 	public void checkGuess(char guessedChar)
 	{
-		// makes sure that the letter(whether it is lower case or upper case) is correct when guessed
+		// makes sure that the letter(whether it is lower case or upper case) is
+		// correct when guessed
 		guessedChar = Character.toLowerCase(guessedChar);
 		boolean correctGuess = false;
 
@@ -309,16 +330,16 @@ public class WordPuzzleGame extends JFrame// a word puzzle game is a JFrame
 		// Check for a win or loss
 		if (new String(guessedWord).equals(selectedWord))
 		{
-			//prints out a message if the guessed word is correct
+			// prints out a message if the guessed word is correct
 			messageLabel.setText("You win! The word was: " + selectedWord);
 
-			//resets the hint count to 0 every time a word is guessed correctly
+			// resets the hint count to 0 every time a word is guessed correctly
 			hintCount = 0;
-			
-			//enables the hint button
+
+			// enables the hint button
 			hintButton.setEnabled(true);
-			
-			//selects a new word
+
+			// selects a new word
 			selectNewWord();
 			displayLabel.setText(getDisplayWord());
 			messageLabel.setText("");
@@ -326,7 +347,8 @@ public class WordPuzzleGame extends JFrame// a word puzzle game is a JFrame
 
 		else if (wrongGuesses >= maximumattempts)
 		{
-			//prints out a message after the maximum amount of attempts are used without correctly guessing the word
+			// prints out a message after the maximum amount of attempts are
+			// used without correctly guessing the word
 			messageLabel.setText("You lose! The word was: " + selectedWord);
 			playAgainButton.setVisible(true);
 		}
@@ -337,9 +359,9 @@ public class WordPuzzleGame extends JFrame// a word puzzle game is a JFrame
 	 */
 	public void endGame(String message)
 	{
-		input.setEnabled(false);//
-		messageLabel.setText(message);
-		gameTimer.stop();
+		input.setEnabled(false);// disables input from the user
+		messageLabel.setText(message);// sets the message to the message label
+		gameTimer.stop();// stops the game timer
 	}
 
 	/**

@@ -1,5 +1,5 @@
 /**
- * GameTimer.java 
+ * GameTimer.java  
  * 
  * Purpose:
  * - Manages the countdown timer for the Word Puzzle Game.
