@@ -95,10 +95,14 @@ public class WordPuzzleGame extends JFrame// a word puzzle game is a JFrame
 		// message label
 		messageLabel = new JLabel("", SwingConstants.CENTER);
 
+		//message for the timer 
 		timerLabel = new JLabel("Time remaining: 60 seconds",
 				SwingConstants.CENTER);
 
+		//creates a new instance of the GameTimer 
 		gameTimer = new GameTimer(60, timerLabel, this);
+		
+		//starts the game timer
 		gameTimer.start();
 
 		// input field for one character
@@ -232,8 +236,10 @@ public class WordPuzzleGame extends JFrame// a word puzzle game is a JFrame
 	 */
 	private void provideHint()
 	{
+		//initializes the hintGiven to false
 		boolean hintGiven = false;
 
+		//disables and prints out a message if the hint count is more or equal to max hints
 		if (hintCount >= maxhints)
 		{
 			messageLabel.setText("Maximum amount of hints reached!");
@@ -242,6 +248,7 @@ public class WordPuzzleGame extends JFrame// a word puzzle game is a JFrame
 			return;
 		}
 
+		//traverses the length of the word
 		for (int i = 0; i < selectedWord.length() && !hintGiven; i++)
 		{
 			if (guessedWord[i] == '_')
